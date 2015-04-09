@@ -1,0 +1,27 @@
+{
+	"dependencies": {
+		"bash.origin": "0.1.x"
+	},
+	"main": "./main.js",
+    "imports": {
+        "globals": {
+            "console": true,
+            "insight": true
+        }
+    },
+	"exports": {
+		"bundles": {
+			"main.js": "./main.js"
+		}
+	},
+	"config": {
+		"pio.deploy.converter": {
+			"name": "nodejs-lib"
+		}
+	},
+	"layout": {
+		"directories": {
+			"bundles": "./.pinf/github.com~pinf-it~pinf-it-bundler~0"
+		}
+	}
+}
