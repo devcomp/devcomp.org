@@ -2,7 +2,7 @@
 	"dependencies": {
 		"bash.origin": "0.1.x"
 	},
-	"main": "./main.js",
+	"main": "./vortex.js",
     "imports": {
         "globals": {
             "console": true,
@@ -11,7 +11,7 @@
     },
 	"exports": {
 		"bundles": {
-			"main.js": "./main.js"
+			"vortex.js": "./vortex.js"
 		}
 	},
 	"config": {

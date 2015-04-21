@@ -1,0 +1,9 @@
+{
+	"config": {
+		"expand.genesis.pinf.org/0": {
+			"workspaceVariables": {
+				"EXTENDS": "{\"devcomp.org\": \"{{__DIRNAME__}}/*.proto.json\"}"
+			}
+		}
+	}
+}

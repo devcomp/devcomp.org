@@ -5,14 +5,13 @@
 	},
 	"config": {
 		"devcomp.org/0": {
+			"$impl": null,
 			"$to": "devcomp.org",
+			"dist": {
+				"catalog": "{{$from.pgs-distribution.distributions.dist.url}}/catalog.json"
+			},
 			"run": {
 				"homepage": "{{$from.pgs-browser.homepage}}"
-			}
-		},
-		"expand.genesis.pinf.org/0": {
-			"workspaceVariables": {
-				"EXTENDS": "[\"{{__DIRNAME__}}/*.proto.json\"]"
 			}
 		},
 		"github.com/pinf-it/pinf-it-vcs-insight/0": {
@@ -28,6 +27,28 @@
 			"target": "browser",
 			"sourceHash": "{{$from.pgs-filetree.hash}}",
 			"sourcePath": "{{$from.pgs.workspaceRoot}}"
+		},
+		"github.com/pinf-to/pinf-to-sourcemint/0": {
+			"$to": "pgs-bundle-catalogued",
+			"catalog": {
+				"uid": "{{$from.pgs.uid}}",
+				"revision": "{{$from.pgs-vcs.commit}}-{{$from.pgs-filetree.hash}}",
+				"name": "{{$from.pgs.basename}}",
+				"alias": "{{$from.pgs.basename}}"
+			},
+			"streams": {
+				"master": {
+					"id": "{{$from.pgs.uid}}",
+					"revision": "{{$from.pgs-filetree.hash}}",
+					"sourceHash": "{{$from.pgs-filetree.hash}}",
+					"sourceFiles": "{{$from.pgs-filetree.paths}}",
+					"aspects": {
+						"archive.tar.gz": {
+							"bundler": "tar.gz"
+						}
+					}
+				}
+			}
 		},
 		"github.com/bash-origin/bash.origin.prompt/0": {
 			"$to": "pgs-prompt",
@@ -55,6 +76,40 @@
 							"value": "{{env.BO_PACKAGES_DIR}}"
 						}
 					}
+				},
+				"aws": {
+			        "label": "Amazon Web Services",
+			        "url": "http://aws.amazon.com",
+			        "variables": {
+			            "AWS_ACCOUNT_EMAIL": {
+			                "type": "password",
+			                "question": "Enter the email address of the AWS account that holds your IAM account"
+			            },
+			            "AWS_IAM_USERNAME": {
+			                "type": "password",
+			                "question": "Enter the username of your IAM account"
+			            },
+			            "AWS_ACCESS_KEY": {
+			                "type": "password",
+			                "question": "Enter your AWS Access Key from your IAM account"
+			            },
+			            "AWS_SECRET_KEY": {
+			                "type": "password",
+			                "question": "Enter your AWS Secret Key from your IAM account"
+			            }
+			        }
+			    }
+			}
+		},
+		"github.com/pinf-to/pinf-to-aws-s3/0": {
+			"$to": "pgs-distribution",
+			"accessKeyId": "{{$from.pgs-prompt.services.aws.variables.AWS_ACCESS_KEY.value}}",
+			"secretAccessKey": "{{$from.pgs-prompt.services.aws.variables.AWS_SECRET_KEY.value}}",
+			"distributions": {
+				"dist": {
+					"bucket": "{{$from.pgs.basename}}",
+					"path": ".dist/",
+					"source": "{{$from.pgs-bundle-catalogued.path}}"
 				}
 			}
 		},
@@ -79,7 +134,7 @@
 			"name": "{{$from.pgs.basename}}",
 			"config": {
 				"label": "{{$from.pgs.basename}}",
-				"rootVortexUrl": "http://{{$from.pgs-server.bind}}:{{$from.pgs-server.port}}/bundles/vortex.js"
+				"mainComponentUrl": "http://{{$from.pgs-server.bind}}:{{$from.pgs-server.port}}/bundles/main.js"
 			}
 		},
 		"github.com/pinf-to/pinf-to-mozilla-firefox-profile/0": {
