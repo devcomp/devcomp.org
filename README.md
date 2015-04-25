@@ -3,7 +3,7 @@
 DeveloperCompanion (devcomp)
 ============================
 
-| DeveloperCompanion is a **100% open and hackable dev system** that can be used for collaborative realtime distributed system development
+> DeveloperCompanion is a **100% open and hackable dev system** that can be used for collaborative realtime distributed system development.
 
 [DeveloperCompanion](devcomp) is [my](http://christophdorn.com) first *constantly improving* **reference implementation** for the application of the [PINF.Genesis](http://genesis.pinf.org) patterns to:
 
