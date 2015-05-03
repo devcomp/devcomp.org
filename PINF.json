@@ -1,0 +1,24 @@
+{
+    "boot": {
+        "config": "devcomp.org/0"
+    },
+    "config": {
+        "devcomp.org/0": {
+            "$to": "devcomp.org",
+            "run": {
+                "homepage": "{{$from.browser.homepage}}"
+            }
+        },
+        "genesis.pinf.org/0": {
+            "programs": {
+                "client": "{{__DIRNAME__}}/client/program.json"
+            }
+        },
+        "github.com/pinf-to/pinf-to-mozilla-firefox-profile/0": {
+            "$to": "browser",
+            "browserVersion": "40.0a1",
+            "browserRelease": "nightly",
+            "homepage": "http://localhost:{{$from.pgs.programs.client.getRuntimeConfigFor(server).port}}"
+        }
+    }
+}
