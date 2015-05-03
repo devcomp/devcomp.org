@@ -1,0 +1,10 @@
+{
+  "name": "devcomp.org",
+  "version": "0.1.0",
+  "scripts": {
+    "install": "./bin/install"
+  },
+  "dependencies": {
+    "bash.origin": "0.1.x"
+  }
+}
