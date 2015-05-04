@@ -26,7 +26,7 @@
         "pinf-to-pio": {
             "depends": [
                 "bash.origin",
-                "to.pinf.lib",
+                "to.pinf.lib"
             ],
             "location": "../.deps/github.com~pinf-to~pinf-to-pio~0/source/installed/master",
             "install": true
@@ -39,6 +39,12 @@
             ],
             "location": "../.deps/github.com~pinf-to~pinf-to-mozilla-firefox-profile~0/source/installed/master",
             "install": true
+        }
+    },
+    "config": {
+        "smi.cli": {
+            "packagesDirectory": "node_modules",
+            "latestOnly": true
         }
     }
 }
