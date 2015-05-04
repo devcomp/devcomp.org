@@ -13,7 +13,7 @@
 	},
 	"layout": {
 		"directories": {
-			"bundles": "./.pinf/github.com~pinf-it~pinf-it-bundler~0"
+			"bundles": "./../.pinf/github.com~pinf-it~pinf-it-bundler~0"
 		}
 	}
 }
