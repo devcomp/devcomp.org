@@ -7,39 +7,10 @@ function init {
 	local __BO_DIR__="$___TMP___"
 
 
-#	if [ ! -e "$__BO_DIR__/../.call.on.provisioned" ]; then
-		# Called from `npm install`.
-
-		pushd "$__BO_DIR__/.." > /dev/null
-			BO_callPlugin "bash.origin.pinf@0.1.1" ensure genesis $@
-		popd > /dev/null
-
-		# Will cause us to run again triggered by `boot`.
-#		echo "$__BO_DIR__/install" > "$__BO_DIR__/../.call.on.provisioned"
-
-		return 0
-#	fi
-	if [ ! -e "$__BO_DIR__/../.pgs/.provisioned" ]; then
-		# Trigger a fresh install sequence.
-		rm -f "$__BO_DIR__/../.call.on.provisioned"
-		return 0
-	fi
-
-	# Called from `boot` after expanding PINF.Genesis System (scheduled above).
-
-	BO_format "$VERBOSE" "HEADER" "Installing devcomp.org dependencies"
 	pushd "$__BO_DIR__/.." > /dev/null
-		if [ ! -e ".installed" ]; then
-		 	if [ "$VERBOSE" == "1" ]; then
-				BO_run_smi install -v
-		 	else
-				BO_run_smi install > /dev/null
-		 	fi
-			touch ".installed"
-		else
-			BO_log "$VERBOSE" "Already installed ($__BO_DIR__/../.installed found)."
+		if [ ! -e ".pgs/.provisioned" ]; then
+			BO_callPlugin "bash.origin.pinf@0.1.1" ensure genesis $@
 		fi
 	popd > /dev/null
-	BO_format "$VERBOSE" "FOOTER"
 }
 init $@
