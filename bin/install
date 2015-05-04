@@ -7,7 +7,7 @@ function init {
 	local __BO_DIR__="$___TMP___"
 
 
-	if [ ! -e "$__BO_DIR__/../.call.on.provisioned" ]; then
+#	if [ ! -e "$__BO_DIR__/../.call.on.provisioned" ]; then
 		# Called from `npm install`.
 
 		pushd "$__BO_DIR__/.." > /dev/null
@@ -15,10 +15,10 @@ function init {
 		popd > /dev/null
 
 		# Will cause us to run again triggered by `boot`.
-		echo "$__BO_DIR__/install" > "$__BO_DIR__/../.call.on.provisioned"
+#		echo "$__BO_DIR__/install" > "$__BO_DIR__/../.call.on.provisioned"
 
 		return 0
-	fi
+#	fi
 	if [ ! -e "$__BO_DIR__/../.pgs/.provisioned" ]; then
 		# Trigger a fresh install sequence.
 		rm -f "$__BO_DIR__/../.call.on.provisioned"

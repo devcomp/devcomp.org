@@ -20,5 +20,39 @@
             "browserRelease": "nightly",
             "homepage": "http://localhost:{{$from.pgs.programs.client.getRuntimeConfigFor(server).port}}"
         }
+    },
+    "mappings": {
+        "pinf-it-bundler": {
+            "location": "{{__DIRNAME__}}/.deps/github.com~pinf-it~pinf-it-bundler~0/source/installed/master",
+            "install": true
+        },
+        "pinf-to-browser": {
+            "depends": [
+                "to.pinf.lib",
+                "bash.origin"
+            ],
+            "location": "{{__DIRNAME__}}/.deps/github.com~pinf-to~pinf-to-browser~0/source/installed/master",
+            "install": true
+        },
+        "smi.cli": "{{__DIRNAME__}}/.deps/github.com~sourcemint~smi~0/source/installed/master",
+        "bash.origin": "{{__DIRNAME__}}/.deps/github.com~bash-origin~bash.origin~0/source/installed/master",
+        "to.pinf.lib": "{{__DIRNAME__}}/.deps/github.com~pinf-to~to.pinf.lib~0/source/installed/master",
+        "pinf-to-pio": {
+            "depends": [
+                "bash.origin",
+                "to.pinf.lib"
+            ],
+            "location": "{{__DIRNAME__}}/.deps/github.com~pinf-to~pinf-to-pio~0/source/installed/master",
+            "install": true
+        },
+        "pinf-to-mozilla-firefox-profile": {
+            "depends": [
+                "smi.cli",
+                "bash.origin",
+                "to.pinf.lib"
+            ],
+            "location": "{{__DIRNAME__}}/.deps/github.com~pinf-to~pinf-to-mozilla-firefox-profile~0/source/installed/master",
+            "install": true
+        }
     }
 }
