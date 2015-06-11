@@ -1,55 +1,102 @@
 {
-    "boot": {
-        "config": "devcomp.org/0"
+    "@extends": {
+        "ScriptedCloud": "/pinf.genesis/03-pinf.tools.ScriptedCloud/PINF.proto.json",
+        "vm.pinf.io": "/pinf.genesis/03-vm.pinf.io/PINF.proto.json",
+        "to.pinf.dnsimple": {
+            "location": "/pinf.genesis/03-pinf.tools.ScriptedCloud/PINF.proto/to.pinf.dnsimple.proto.patch.json"
+        },
+        "io.pinf.db.postgresql": {
+            "location": "/pinf.genesis/03-vm.pinf.io/PINF.proto/io.pinf.db.postgresql~0.proto.patch.json",
+            "@args": {
+                "PGS_WORKSPACE_ROOT": "{{env.PGS_WORKSPACE_ROOT}}",
+                "PGS_PACKAGES_DIRPATH": "{{env.PGS_PACKAGES_DIRPATH}}",
+                "roles": {
+                    "lunchroom": {
+                        "password": "1E07DEEC-DE21-4E84-B47F-104C5070259A"
+                    }
+                },
+                "databases": {
+                    "lunchroom": {}
+                }
+            }
+        },
+        "io.pinf.server.grunt": {
+            "location": "/pinf.genesis/03-vm.pinf.io/PINF.proto/io.pinf.server.grunt~0.proto.patch.json",
+            "@args": {
+                "PGS_WORKSPACE_ROOT": "{{env.PGS_WORKSPACE_ROOT}}",
+                "PGS_PACKAGES_DIRPATH": "{{env.PGS_PACKAGES_DIRPATH}}",
+                "grunts": {
+                    "local": {
+                        "lunchroom-mockup": {
+                            "location": "{{__DIRNAME__}}/07-lunchroom-mockup"
+                        }
+                    },
+                    "remote": {
+                        "lunchroom-mockup": {
+                            "location": "07-lunchroom-mockup"
+                        }
+                    }
+                }
+            }
+        },
+        "io.pinf.server.webpack": {
+            "location": "/pinf.genesis/03-vm.pinf.io/PINF.proto/io.pinf.server.webpack~0.proto.patch.json",
+            "@args": {
+                "PGS_WORKSPACE_ROOT": "{{env.PGS_WORKSPACE_ROOT}}",
+                "PGS_PACKAGES_DIRPATH": "{{env.PGS_PACKAGES_DIRPATH}}",
+                "packs": {
+                    "local": {
+                        "lunchroom-mockup": {
+                            "location": "{{__DIRNAME__}}/07-lunchroom-mockup"
+                        }
+                    },
+                    "remote": {
+                        "lunchroom-mockup": {
+                            "location": "07-lunchroom-mockup"
+                        }
+                    }
+                }
+            }
+        }
     },
     "config": {
-        "devcomp.org/0": {
-            "$to": "devcomp.org",
-            "run": {
-                "homepage": "{{$from.browser.homepage}}"
-            }
+        "ScriptedCloud.PINF.Tools/boot/0": {
+            "$depends": [
+                "devcomp.org-dev-online"
+            ]
         },
-        "genesis.pinf.org/0": {
-            "programs": {
-                "client": "{{__DIRNAME__}}/client/program.json"
-            }
+        "devcomp.org/dev/0": {
+            "$to": "devcomp.org-dev",
+            "$depends": [
+                "devcomp.org-dev-local",
+                "devcomp.org-dev-online"
+            ]
         },
-        "github.com/pinf-to/pinf-to-mozilla-firefox-profile/0": {
-            "$to": "browser",
-            "browserVersion": "40.0a1",
-            "browserRelease": "nightly",
-            "homepage": "http://localhost:{{$from.pgs.programs.client.getRuntimeConfigFor(server).port}}"
+        "devcomp.org/dev-local/0": {
+            "$to": "devcomp.org-dev-local",
+            "$depends": [
+                "webpack-service",
+                "grunt-service",
+                "services-proxy"
+            ]
+        },
+        "devcomp.org/dev-online/0": {
+            "$to": "devcomp.org-dev-online",
+            "$depends": [
+                "dns",
+                "pio-sync-services"
+            ]
+        },
+        "ScriptedCloud.PINF.Tools/0": {
+            "topLevelDomain": "pinf.me",
+            "hostname": "{{env.PGS_WORKSPACE_UID}}.devcomp.github.pinf.me",
+            "dirname": "devcomp.github.pinf.me~{{env.PGS_WORKSPACE_UID}}",
+            "privateKeyPath": "{{env.HOME}}/.ssh/devcomp.github.pinf.me-{{env.PGS_WORKSPACE_UID}}.rsa"
         }
     },
     "mappings": {
-        "pinf-it-bundler": {
-            "location": "{{__DIRNAME__}}/.deps/github.com~pinf-it~pinf-it-bundler~0/source/installed/master",
-            "install": true
-        },
-        "pinf-to-browser": {
-            "depends": [
-                "to.pinf.lib",
-                "bash.origin"
-            ],
-            "location": "{{__DIRNAME__}}/.deps/github.com~pinf-to~pinf-to-browser~0/source/installed/master",
-            "install": true
-        },
-        "pinf-to-pio": {
-            "depends": [
-                "bash.origin",
-                "to.pinf.lib"
-            ],
-            "location": "{{__DIRNAME__}}/.deps/github.com~pinf-to~pinf-to-pio~0/source/installed/master",
-            "install": true
-        },
-        "pinf-to-mozilla-firefox-profile": {
-            "depends": [
-                "smi.cli",
-                "bash.origin",
-                "to.pinf.lib"
-            ],
-            "location": "{{__DIRNAME__}}/.deps/github.com~pinf-to~pinf-to-mozilla-firefox-profile~0/source/installed/master",
-            "install": true
-        }
-    }
+    },
+    "@overlays": [
+        "{{env.PIO_PROFILE_PATH}}"
+    ]
 }
