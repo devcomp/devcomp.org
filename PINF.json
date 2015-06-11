@@ -10,14 +10,8 @@
             "@args": {
                 "PGS_WORKSPACE_ROOT": "{{env.PGS_WORKSPACE_ROOT}}",
                 "PGS_PACKAGES_DIRPATH": "{{env.PGS_PACKAGES_DIRPATH}}",
-                "roles": {
-                    "lunchroom": {
-                        "password": "1E07DEEC-DE21-4E84-B47F-104C5070259A"
-                    }
-                },
-                "databases": {
-                    "lunchroom": {}
-                }
+                "roles": {},
+                "databases": {}
             }
         },
         "io.pinf.server.grunt": {
@@ -26,16 +20,8 @@
                 "PGS_WORKSPACE_ROOT": "{{env.PGS_WORKSPACE_ROOT}}",
                 "PGS_PACKAGES_DIRPATH": "{{env.PGS_PACKAGES_DIRPATH}}",
                 "grunts": {
-                    "local": {
-                        "lunchroom-mockup": {
-                            "location": "{{__DIRNAME__}}/07-lunchroom-mockup"
-                        }
-                    },
-                    "remote": {
-                        "lunchroom-mockup": {
-                            "location": "07-lunchroom-mockup"
-                        }
-                    }
+                    "local": {},
+                    "remote": {}
                 }
             }
         },
@@ -45,17 +31,17 @@
                 "PGS_WORKSPACE_ROOT": "{{env.PGS_WORKSPACE_ROOT}}",
                 "PGS_PACKAGES_DIRPATH": "{{env.PGS_PACKAGES_DIRPATH}}",
                 "packs": {
-                    "local": {
-                        "lunchroom-mockup": {
-                            "location": "{{__DIRNAME__}}/07-lunchroom-mockup"
-                        }
-                    },
-                    "remote": {
-                        "lunchroom-mockup": {
-                            "location": "07-lunchroom-mockup"
-                        }
-                    }
+                    "local": {},
+                    "remote": {}
                 }
+            }
+        },
+        "to.pinf.nwjs": {
+            "location": "/pinf.genesis/04-devcomp.org/PINF.proto/github.com~pinf-to~pinf-to-nwjs~0.proto.patch.json",
+            "@args": {
+                "PGS_WORKSPACE_ROOT": "{{env.PGS_WORKSPACE_ROOT}}",
+                "PGS_PACKAGES_DIRPATH": "{{env.PGS_PACKAGES_DIRPATH}}",
+                "install": true
             }
         }
     },
@@ -94,8 +80,7 @@
             "privateKeyPath": "{{env.HOME}}/.ssh/devcomp.github.pinf.me-{{env.PGS_WORKSPACE_UID}}.rsa"
         }
     },
-    "mappings": {
-    },
+    "mappings": {},
     "@overlays": [
         "{{env.PIO_PROFILE_PATH}}"
     ]

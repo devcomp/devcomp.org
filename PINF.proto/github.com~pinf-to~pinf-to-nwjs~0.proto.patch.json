@@ -1,0 +1,70 @@
+{
+    "@applicator": "org.pinf.lib/0/json-patch",
+    "@args": {
+        "PGS_WORKSPACE_ROOT": "",
+        "PGS_PACKAGES_DIRPATH": "",
+        "install": false
+    },
+    "patches": [
+        [
+            "$.config['ScriptedCloud.PINF.Tools/boot/0'].$depends",
+            [
+                "nwjs-service"
+            ]
+        ],
+        [
+            "$.config",
+            {
+                "github.com/pinf-to/pinf-to-process/0": {
+                    "$to": {
+                        "nwjs-service": {
+                            "basePath": "{{$.@args.PGS_PACKAGES_DIRPATH}}/github.com~pinf-to~pinf-to-nwjs~0/source/installed/master",
+                            "commands": {
+                                "start": "./bin/run"
+                            },
+                            "boot": {
+                                "config": "pinf-to-nwjs/0"
+                            },
+                            "config": {
+                                "pinf-to-nwjs/0": {
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        ],
+        [
+            "$.mappings",
+            {
+                "./../.deps/github.com~bash-origin~bash.origin.nw~0/source/installed/master": {
+                    "location": "{{__DIRNAME__}}/../.deps/github.com~bash-origin~bash.origin.nw~0/source/installed/master",
+                    "install": false
+                },
+                "bash.origin.nw": {
+                    "depends": [
+                        "bash.origin"
+                    ],
+                    "location": "{{__DIRNAME__}}/../.deps/github.com~bash-origin~bash.origin.nw~0/source/installed/master",
+                    "giturl": "git@github.com:bash-origin/bash.origin.nw.git",
+                    "install": "{{$.@args.install}}"
+                },
+                "./../.deps/github.com~pinf-to~pinf-to-nwjs~0/source/installed/master": {
+                    "location": "{{__DIRNAME__}}/../.deps/github.com~pinf-to~pinf-to-nwjs~0/source/installed/master",
+                    "install": false
+                },
+                "to.pinf.nwjs": {
+                    "depends": [
+                        "bash.origin",
+                        "org.pinf.lib",
+                        "org.pinf.genesis.lib",
+                        "bash.origin.nw"
+                    ],
+                    "location": "{{__DIRNAME__}}/../.deps/github.com~pinf-to~pinf-to-nwjs~0/source/installed/master",
+                    "giturl": "git@github.com:pinf-to/pinf-to-nwjs.git",
+                    "install": "{{$.@args.install}}"
+                }
+            }
+        ]
+    ]
+}
