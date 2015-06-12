@@ -1,16 +1,15 @@
 {
-    "name": "devcomp.org-client",
+    "name": "devcomp.org-app",
 	"boot": {
 		"package": "./package.json",
-		"config": "devcomp.org/client/0"
+		"config": "devcomp.org/app/0"
 	},
 	"config": {
-		"devcomp.org/client/0": {
+		"devcomp.org/app/0": {
 			"$to": "boot",
-			"run": {
-				"rootVortexUrl": "http://{{$from.server.bind}}:{{$from.server.port}}/bundles/main.js",
-				"bundlesBasePath": "{{$from.server.bundlesBasePath}}"
-			}
+			"$depends": [
+				"app"
+			]
 		},
 		"github.com/pinf-it/pinf-it-bundler/0": {
 			"$to": "bundles",
@@ -23,16 +22,8 @@
 			"path": "{{__DIRNAME__}}",
 			"watch": true
 		},		
-		"github.com/pinf-to/pinf-to-pio/0": {
-			"$to": "network",
-			"ports": {
-				"default": "{{getFreePort()}}"
-			}
-		},
-		"github.com/pinf-to/pinf-to-browser/0": {
-			"$to": "server",
-			"bind": "127.0.0.1",
-			"port": "{{$from.network.ports.default}}",
+		"github.com/pinf-to/pinf-to-nwjs/0": {
+			"$to": "app",
 			"bundlesBasePath": "{{$from.bundles.bundlePath}}",
 			"config": {
 				"sourceHashFile": "{{$from.filetree.hashFile}}"

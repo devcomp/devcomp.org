@@ -1,0 +1,30 @@
+{
+    "@applicator": "org.pinf.lib/0/json-patch",
+    "@args": {
+        "PGS_WORKSPACE_ROOT": "",
+        "PGS_PACKAGES_DIRPATH": "",
+        "install": false
+    },
+    "patches": [
+        [
+            "$.config['ScriptedCloud.PINF.Tools/boot/0'].$depends",
+            [
+                "intern-service"
+            ]
+        ],
+        [
+            "$.mappings",
+            {
+                "./../.deps/github.com~devcomp-io~io.devcomp.tool.intern~0/source/installed/master": {
+                    "location": "{{__DIRNAME__}}/../.deps/github.com~devcomp-io~io.devcomp.tool.intern~0/source/installed/master",
+                    "install": false
+                },
+                "bash.origin.nw": {
+                    "location": "{{__DIRNAME__}}/../.deps/github.com~devcomp-io~io.devcomp.tool.intern~0/source/installed/master",
+                    "giturl": "git@github.com:devcomp-io/io.devcomp.tool.intern.git",
+                    "install": "{{$.@args.install}}"
+                }
+            }
+        ]
+    ]
+}

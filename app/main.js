@@ -5,7 +5,7 @@ exports.main = function (API) {
 
 	exports.turn = function (resolvedConfig) {
 
-		API.insight.debug("CLIENT MAIN!");
+		API.insight.debug("DEVCOMP CLIENT MAIN APP!");
 
 	}
 

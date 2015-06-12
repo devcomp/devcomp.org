@@ -14,7 +14,7 @@ DeveloperCompanion (devcomp)
 Overview
 --------
 
-In the [Semantic Web](http://en.wikipedia.org/wiki/Semantic_Web) context, [PINF](http://pinf.org) is a **Virtual Holographic Nodal Platform** in that it can erects virtual systems with API surfaces for *every URI it encounters* and allows the mounting of other URIs and the systems based on these URIs within arbitrary points of a host system.
+In the [Semantic Web](http://en.wikipedia.org/wiki/Semantic_Web) context, [PINF](http://pinf.org) is a **Virtual Holographic Nodal Platform** in that it erects virtual systems with API surfaces for *every URI it encounters* and allows the mounting of other URIs and the systems based on these URIs within arbitrary points of a host system.
 
 PINF.Genesis focuses on applying the PINF patterns to the *Software Development Lifecycle* by implementing minimal core patterns that may be applied to all aspects of the SDL through multiple component implementations that interoperate.
 
