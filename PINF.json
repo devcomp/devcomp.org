@@ -43,6 +43,14 @@
                 "PGS_PACKAGES_DIRPATH": "{{env.PGS_PACKAGES_DIRPATH}}",
                 "install": true
             }
+        },
+        "org.devcomp.portal.ComponentTree": {
+            "location": "/pinf.genesis/04-devcomp.org/PINF.proto/github.com~devcomp~org.devcomp.portal.ComponentTree~0.proto.patch.json",
+            "@args": {
+                "PGS_WORKSPACE_ROOT": "{{env.PGS_WORKSPACE_ROOT}}",
+                "PGS_PACKAGES_DIRPATH": "{{env.PGS_PACKAGES_DIRPATH}}",
+                "install": true
+            }
         }
     },
     "config": {
@@ -78,27 +86,7 @@
             "hostname": "{{env.PGS_WORKSPACE_UID}}.devcomp.github.pinf.me",
             "dirname": "devcomp.github.pinf.me~{{env.PGS_WORKSPACE_UID}}",
             "privateKeyPath": "{{env.HOME}}/.ssh/devcomp.github.pinf.me-{{env.PGS_WORKSPACE_UID}}.rsa"
-        },
-        "genesis.pinf.org/0": {
-            "programs": {
-                "app": "{{__DIRNAME__}}/app/program.json"
-            }
         }
-    },
-    "mappings": {
-        "pinf.logic-for-devcomp.portal.ComponentTree": {
-            "location": "{{__DIRNAME__}}/../.deps/github.com~pinf-logic~pinf.logic-for-devcomp.portal.ComponentTree~0/source/installed/master",
-            "giturl": "git@github.com:pinf-logic/pinf.logic-for-devcomp.portal.ComponentTree.git",
-            "install": true
-        },
-        "org.devcomp.portal.ComponentTree": {
-            "depends": [
-                "pinf.logic-for-devcomp.portal.ComponentTree"
-            ],
-            "location": "{{__DIRNAME__}}/../.deps/github.com~devcomp~org.devcomp.portal.ComponentTree~0/source/installed/master",
-            "giturl": "git@github.com:devcomp/org.devcomp.portal.ComponentTree.git",
-            "install": true
-        }        
     },
     "@overlays": [
         "{{env.PIO_PROFILE_PATH}}"
