@@ -7,12 +7,6 @@
     },
     "patches": [
         [
-            "$.config['ScriptedCloud.PINF.Tools/boot/0'].$depends",
-            [
-                "nwjs-service"
-            ]
-        ],
-        [
             "$.config",
             {
                 "genesis.pinf.org/0": {
@@ -44,6 +38,15 @@
                 "pinf.logic-for-devcomp.portal.ComponentTree": {
                     "location": "{{__DIRNAME__}}/../.deps/github.com~pinf-logic~pinf.logic-for-devcomp.portal.ComponentTree~0/source/installed/master",
                     "giturl": "git@github.com:pinf-logic/pinf.logic-for-devcomp.portal.ComponentTree.git",
+                    "install": "{{$.@args.install}}"
+                },
+                "./../.deps/github.com~pinf-it~pinf-it-bundler~0/source/installed/master": {
+                    "location": "{{__DIRNAME__}}/../.deps/github.com~pinf-it~pinf-it-bundler~0/source/installed/master",
+                    "install": false
+                },
+                "pinf-it-bundler": {
+                    "location": "{{__DIRNAME__}}/../.deps/github.com~pinf-it~pinf-it-bundler~0/source/installed/master",
+                    "giturl": "git@github.com:pinf-it/pinf-it-bundler.git",
                     "install": "{{$.@args.install}}"
                 }
             }

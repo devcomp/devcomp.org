@@ -88,6 +88,7 @@
             "privateKeyPath": "{{env.HOME}}/.ssh/devcomp.github.pinf.me-{{env.PGS_WORKSPACE_UID}}.rsa"
         }
     },
+    "mappings": {},
     "@overlays": [
         "{{env.PIO_PROFILE_PATH}}"
     ]
