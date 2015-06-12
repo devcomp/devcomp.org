@@ -1,0 +1,7 @@
+{
+    "@extends": {
+        "devcomp.org/PINF.core.json": "{{__DIRNAME__}}/PINF.core.json"
+    },
+    "mappings": {
+    }
+}

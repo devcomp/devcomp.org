@@ -1,0 +1,73 @@
+{
+    "@extends": {
+        "ScriptedCloud": "/pinf.genesis/03-pinf.tools.ScriptedCloud/PINF.proto.json",
+        "vm.pinf.io": "/pinf.genesis/03-vm.pinf.io/PINF.proto.json",
+        "to.pinf.dnsimple": {
+            "location": "/pinf.genesis/03-pinf.tools.ScriptedCloud/PINF.proto/to.pinf.dnsimple.proto.patch.json"
+        },
+        "io.pinf.server.grunt": {
+            "location": "/pinf.genesis/03-vm.pinf.io/PINF.proto/io.pinf.server.grunt~0.proto.patch.json",
+            "@args": {
+                "PGS_WORKSPACE_ROOT": "{{env.PGS_WORKSPACE_ROOT}}",
+                "PGS_PACKAGES_DIRPATH": "{{env.PGS_PACKAGES_DIRPATH}}",
+                "grunts": {
+                    "local": {},
+                    "remote": {}
+                }
+            }
+        },
+        "io.pinf.server.webpack": {
+            "location": "/pinf.genesis/03-vm.pinf.io/PINF.proto/io.pinf.server.webpack~0.proto.patch.json",
+            "@args": {
+                "PGS_WORKSPACE_ROOT": "{{env.PGS_WORKSPACE_ROOT}}",
+                "PGS_PACKAGES_DIRPATH": "{{env.PGS_PACKAGES_DIRPATH}}",
+                "packs": {
+                    "local": {},
+                    "remote": {}
+                }
+            }
+        },
+        "to.pinf.nwjs": {
+            "location": "/pinf.genesis/04-devcomp.org/PINF.proto/github.com~pinf-to~pinf-to-nwjs~0.proto.patch.json",
+            "@args": {
+                "PGS_WORKSPACE_ROOT": "{{env.PGS_WORKSPACE_ROOT}}",
+                "PGS_PACKAGES_DIRPATH": "{{env.PGS_PACKAGES_DIRPATH}}"
+            }
+        },
+        "org.devcomp.portal.ComponentTree": {
+            "location": "/pinf.genesis/04-devcomp.org/PINF.proto/github.com~devcomp~org.devcomp.portal.ComponentTree~0.proto.patch.json",
+            "@args": {
+                "PGS_WORKSPACE_ROOT": "{{env.PGS_WORKSPACE_ROOT}}",
+                "PGS_PACKAGES_DIRPATH": "{{env.PGS_PACKAGES_DIRPATH}}"
+            }
+        }
+    },
+    "config": {
+        "ScriptedCloud.PINF.Tools/boot/0": {
+            "$depends": []
+        },
+        "devcomp.org/dev/0": {
+            "$to": "devcomp.org-dev",
+            "$depends": [
+                "devcomp.org-dev-local",
+                "devcomp.org-dev-online"
+            ]
+        },
+        "devcomp.org/dev-local/0": {
+            "$to": "devcomp.org-dev-local",
+            "$depends": [
+                "webpack-service",
+                "grunt-service",
+                "services-proxy"
+            ]
+        },
+        "devcomp.org/dev-online/0": {
+            "$to": "devcomp.org-dev-online",
+            "$depends": [
+                "dns",
+                "pio-sync-services"
+            ]
+        }
+    },
+    "mappings": {}
+}
