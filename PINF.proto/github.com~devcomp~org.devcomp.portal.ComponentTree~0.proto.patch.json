@@ -1,55 +1,79 @@
 {
-    "@applicator": "org.pinf.lib/0/json-patch",
+    "@extends": {
+        "io.pinf.server.grunt": {
+            "location": "/pinf.genesis/03-vm.pinf.io/PINF.proto/io.pinf.server.grunt~0.proto.patch.json",
+            "@args": {
+                "PGS_WORKSPACE_ROOT": "{{env.PGS_WORKSPACE_ROOT}}",
+                "PGS_PACKAGES_DIRPATH": "{{env.PGS_PACKAGES_DIRPATH}}",
+                "grunts": {
+                    "local": {
+                        "org.devcomp.portal.ComponentTree": {
+                            "location": "{{PGS_PACKAGES_DIRPATH}}/github.com~devcomp~org.devcomp.portal.ComponentTree~0/source/installed/master"
+                        }
+                    }
+                }
+            }
+        },
+        "io.pinf.server.webpack": {
+            "location": "/pinf.genesis/03-vm.pinf.io/PINF.proto/io.pinf.server.webpack~0.proto.patch.json",
+            "@args": {
+                "PGS_WORKSPACE_ROOT": "{{env.PGS_WORKSPACE_ROOT}}",
+                "PGS_PACKAGES_DIRPATH": "{{env.PGS_PACKAGES_DIRPATH}}",
+                "packs": {
+                    "local": {
+                        "org.devcomp.portal.ComponentTree": {
+                            "location": "{{PGS_PACKAGES_DIRPATH}}/github.com~devcomp~org.devcomp.portal.ComponentTree~0/source/installed/master"
+                        }
+                    }
+                }
+            }
+        }
+    },
     "@args": {
         "PGS_WORKSPACE_ROOT": "",
         "PGS_PACKAGES_DIRPATH": "",
         "install": false
+    },    
+    "config": {
+        "genesis.pinf.org/0": {
+            "programs": {
+                "app": "{{env.PGS_PACKAGES_DIRPATH}}/github.com~devcomp~org.devcomp.portal.ComponentTree~0/source/installed/master/program.json"
+            }
+        },
+        "ScriptedCloud.PINF.Tools/boot/0": {
+            "$depends": []
+        }
     },
-    "patches": [
-        [
-            "$.config",
-            {
-                "genesis.pinf.org/0": {
-                    "programs": {
-                        "app": "{{__DIRNAME__}}/../.deps/github.com~devcomp~org.devcomp.portal.ComponentTree~0/source/installed/master/program.json"
-                    }
-                }                
-            }
-        ],
-        [
-            "$.mappings",
-            {
-                "./../.deps/github.com~devcomp~org.devcomp.portal.ComponentTree~0/source/installed/master": {
-                    "location": "{{__DIRNAME__}}/../.deps/github.com~devcomp~org.devcomp.portal.ComponentTree~0/source/installed/master",
-                    "install": false
-                },
-                "org.devcomp.portal.ComponentTree": {
-                    "depends": [
-                        "pinf.logic-for-devcomp.portal.ComponentTree"
-                    ],
-                    "location": "{{__DIRNAME__}}/../.deps/github.com~devcomp~org.devcomp.portal.ComponentTree~0/source/installed/master",
-                    "giturl": "git@github.com:devcomp/org.devcomp.portal.ComponentTree.git",
-                    "install": "{{$.@args.install}}"
-                },
-                "./../.deps/github.com~pinf-logic~pinf.logic-for-devcomp.portal.ComponentTree~0/source/installed/master": {
-                    "location": "{{__DIRNAME__}}/../.deps/github.com~pinf-logic~pinf.logic-for-devcomp.portal.ComponentTree~0/source/installed/master",
-                    "install": false
-                },
-                "pinf.logic-for-devcomp.portal.ComponentTree": {
-                    "location": "{{__DIRNAME__}}/../.deps/github.com~pinf-logic~pinf.logic-for-devcomp.portal.ComponentTree~0/source/installed/master",
-                    "giturl": "git@github.com:pinf-logic/pinf.logic-for-devcomp.portal.ComponentTree.git",
-                    "install": "{{$.@args.install}}"
-                },
-                "./../.deps/github.com~pinf-it~pinf-it-bundler~0/source/installed/master": {
-                    "location": "{{__DIRNAME__}}/../.deps/github.com~pinf-it~pinf-it-bundler~0/source/installed/master",
-                    "install": false
-                },
-                "pinf-it-bundler": {
-                    "location": "{{__DIRNAME__}}/../.deps/github.com~pinf-it~pinf-it-bundler~0/source/installed/master",
-                    "giturl": "git@github.com:pinf-it/pinf-it-bundler.git",
-                    "install": "{{$.@args.install}}"
-                }
-            }
-        ]
-    ]
+    "mappings": {
+        "./../.deps/github.com~devcomp~org.devcomp.portal.ComponentTree~0/source/installed/master": {
+            "location": "{{__DIRNAME2__}}/.deps/github.com~devcomp~org.devcomp.portal.ComponentTree~0/source/installed/master",
+            "install": false
+        },
+        "org.devcomp.portal.ComponentTree": {
+            "depends": [
+                "pinf.logic-for-devcomp.portal.ComponentTree"
+            ],
+            "location": "{{__DIRNAME2__}}/.deps/github.com~devcomp~org.devcomp.portal.ComponentTree~0/source/installed/master",
+            "giturl": "git@github.com:devcomp/org.devcomp.portal.ComponentTree.git",
+            "install": "{{$.@args.install}}"
+        },
+        "./../.deps/github.com~pinf-logic~pinf.logic-for-devcomp.portal.ComponentTree~0/source/installed/master": {
+            "location": "{{__DIRNAME2__}}/.deps/github.com~pinf-logic~pinf.logic-for-devcomp.portal.ComponentTree~0/source/installed/master",
+            "install": false
+        },
+        "pinf.logic-for-devcomp.portal.ComponentTree": {
+            "location": "{{__DIRNAME2__}}/.deps/github.com~pinf-logic~pinf.logic-for-devcomp.portal.ComponentTree~0/source/installed/master",
+            "giturl": "git@github.com:pinf-logic/pinf.logic-for-devcomp.portal.ComponentTree.git",
+            "install": "{{$.@args.install}}"
+        },
+        "./../.deps/github.com~pinf-it~pinf-it-bundler~0/source/installed/master": {
+            "location": "{{__DIRNAME2__}}/.deps/github.com~pinf-it~pinf-it-bundler~0/source/installed/master",
+            "install": false
+        },
+        "pinf-it-bundler": {
+            "location": "{{__DIRNAME2__}}/.deps/github.com~pinf-it~pinf-it-bundler~0/source/installed/master",
+            "giturl": "git@github.com:pinf-it/pinf-it-bundler.git",
+            "install": "{{$.@args.install}}"
+        }
+    }
 }

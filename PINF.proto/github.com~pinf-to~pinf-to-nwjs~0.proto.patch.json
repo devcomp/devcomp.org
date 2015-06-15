@@ -32,19 +32,19 @@
             "$.mappings",
             {
                 "./../.deps/github.com~bash-origin~bash.origin.nw~0/source/installed/master": {
-                    "location": "{{__DIRNAME__}}/../.deps/github.com~bash-origin~bash.origin.nw~0/source/installed/master",
+                    "location": "{{__DIRNAME2__}}/.deps/github.com~bash-origin~bash.origin.nw~0/source/installed/master",
                     "install": false
                 },
                 "bash.origin.nw": {
                     "depends": [
                         "bash.origin"
                     ],
-                    "location": "{{__DIRNAME__}}/../.deps/github.com~bash-origin~bash.origin.nw~0/source/installed/master",
+                    "location": "{{__DIRNAME2__}}/.deps/github.com~bash-origin~bash.origin.nw~0/source/installed/master",
                     "giturl": "git@github.com:bash-origin/bash.origin.nw.git",
                     "install": "{{$.@args.install}}"
                 },
                 "./../.deps/github.com~pinf-to~pinf-to-nwjs~0/source/installed/master": {
-                    "location": "{{__DIRNAME__}}/../.deps/github.com~pinf-to~pinf-to-nwjs~0/source/installed/master",
+                    "location": "{{__DIRNAME2__}}/.deps/github.com~pinf-to~pinf-to-nwjs~0/source/installed/master",
                     "install": false
                 },
                 "to.pinf.nwjs": {
@@ -54,7 +54,7 @@
                         "org.pinf.genesis.lib",
                         "bash.origin.nw"
                     ],
-                    "location": "{{__DIRNAME__}}/../.deps/github.com~pinf-to~pinf-to-nwjs~0/source/installed/master",
+                    "location": "{{__DIRNAME2__}}/.deps/github.com~pinf-to~pinf-to-nwjs~0/source/installed/master",
                     "giturl": "git@github.com:pinf-to/pinf-to-nwjs.git",
                     "install": "{{$.@args.install}}"
                 }

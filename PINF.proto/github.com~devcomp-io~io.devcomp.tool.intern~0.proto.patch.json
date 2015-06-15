@@ -16,11 +16,11 @@
             "$.mappings",
             {
                 "./../.deps/github.com~devcomp-io~io.devcomp.tool.intern~0/source/installed/master": {
-                    "location": "{{__DIRNAME__}}/../.deps/github.com~devcomp-io~io.devcomp.tool.intern~0/source/installed/master",
+                    "location": "{{__DIRNAME2__}}/.deps/github.com~devcomp-io~io.devcomp.tool.intern~0/source/installed/master",
                     "install": false
                 },
                 "bash.origin.nw": {
-                    "location": "{{__DIRNAME__}}/../.deps/github.com~devcomp-io~io.devcomp.tool.intern~0/source/installed/master",
+                    "location": "{{__DIRNAME2__}}/.deps/github.com~devcomp-io~io.devcomp.tool.intern~0/source/installed/master",
                     "giturl": "git@github.com:devcomp-io/io.devcomp.tool.intern.git",
                     "install": "{{$.@args.install}}"
                 }
