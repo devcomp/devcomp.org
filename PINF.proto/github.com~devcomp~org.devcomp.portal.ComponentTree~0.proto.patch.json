@@ -8,7 +8,7 @@
                 "grunts": {
                     "local": {
                         "org.devcomp.portal.ComponentTree": {
-                            "location": "{{PGS_PACKAGES_DIRPATH}}/github.com~devcomp~org.devcomp.portal.ComponentTree~0/source/installed/master"
+                            "location": "{{env.PGS_PACKAGES_DIRPATH}}/github.com~devcomp~org.devcomp.portal.ComponentTree~0/source/installed/master"
                         }
                     }
                 }
@@ -22,7 +22,7 @@
                 "packs": {
                     "local": {
                         "org.devcomp.portal.ComponentTree": {
-                            "location": "{{PGS_PACKAGES_DIRPATH}}/github.com~devcomp~org.devcomp.portal.ComponentTree~0/source/installed/master"
+                            "location": "{{env.PGS_PACKAGES_DIRPATH}}/github.com~devcomp~org.devcomp.portal.ComponentTree~0/source/installed/master"
                         }
                     }
                 }
