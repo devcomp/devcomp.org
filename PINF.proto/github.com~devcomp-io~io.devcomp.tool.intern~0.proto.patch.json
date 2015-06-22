@@ -15,7 +15,7 @@
         [
             "$.mappings",
             {
-                "./../.deps/github.com~devcomp-io~io.devcomp.tool.intern~0/source/installed/master": {
+                "{{env.PGS_PACKAGES_DIRPATH}}/github.com~devcomp-io~io.devcomp.tool.intern~0/source/installed/master": {
                     "location": "{{__DIRNAME2__}}/.deps/github.com~devcomp-io~io.devcomp.tool.intern~0/source/installed/master",
                     "install": false
                 },

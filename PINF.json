@@ -16,16 +16,40 @@
         }
     },
     "mappings": {
+        "{{env.PGS_PACKAGES_DIRPATH}}/github.com~devcomp-io~io.devcomp.tool.intern~0/source/installed/master": {
+            "install": true
+        },
         "bash.origin.nw": {
             "install": true
         },
-        "to.pinf.nwjs": {
+        "{{env.PGS_PACKAGES_DIRPATH}}/github.com~devcomp~org.devcomp.portal.ComponentTree~0/source/installed/master": {
+            "install": true
+        },
+        "org.devcomp.portal.ComponentTree": {
+            "install": true
+        },
+        "{{env.PGS_PACKAGES_DIRPATH}}/github.com~pinf-logic~pinf.logic-for-devcomp.portal.ComponentTree~0/source/installed/master": {
             "install": true
         },
         "pinf.logic-for-devcomp.portal.ComponentTree": {
             "install": true
         },
+        "{{env.PGS_PACKAGES_DIRPATH}}/github.com~pinf-it~pinf-it-bundler~0/source/installed/master": {
+            "install": true
+        },
         "pinf-it-bundler": {
+            "install": true
+        },
+        "{{env.PGS_PACKAGES_DIRPATH}}/github.com~bash-origin~bash.origin.nw~0/source/installed/master": {
+            "install": true
+        },
+        "bash.origin.nw": {
+            "install": true
+        },
+        "{{env.PGS_PACKAGES_DIRPATH}}/github.com~pinf-to~pinf-to-nwjs~0/source/installed/master": {
+            "install": true
+        },
+        "to.pinf.nwjs": {
             "install": true
         }
     },

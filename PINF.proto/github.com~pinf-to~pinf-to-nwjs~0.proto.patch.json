@@ -31,7 +31,7 @@
         [
             "$.mappings",
             {
-                "./../.deps/github.com~bash-origin~bash.origin.nw~0/source/installed/master": {
+                "{{env.PGS_PACKAGES_DIRPATH}}/github.com~bash-origin~bash.origin.nw~0/source/installed/master": {
                     "location": "{{__DIRNAME2__}}/.deps/github.com~bash-origin~bash.origin.nw~0/source/installed/master",
                     "install": false
                 },
@@ -43,7 +43,7 @@
                     "giturl": "git@github.com:bash-origin/bash.origin.nw.git",
                     "install": "{{$.@args.install}}"
                 },
-                "./../.deps/github.com~pinf-to~pinf-to-nwjs~0/source/installed/master": {
+                "{{env.PGS_PACKAGES_DIRPATH}}/github.com~pinf-to~pinf-to-nwjs~0/source/installed/master": {
                     "location": "{{__DIRNAME2__}}/.deps/github.com~pinf-to~pinf-to-nwjs~0/source/installed/master",
                     "install": false
                 },
