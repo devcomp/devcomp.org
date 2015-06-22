@@ -2,6 +2,9 @@
     "@extends": {
         "devcomp.org": "{{__DIRNAME__}}/PINF.proto.json"
     },
+    "boot": {
+        "config": "ScriptedCloud.PINF.Tools/boot/0"
+    },
     "config": {
         "ScriptedCloud.PINF.Tools/boot/0": {
             "$depends": [
