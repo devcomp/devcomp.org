@@ -1,0 +1,595 @@
+{
+    "@extends": {
+        "03-vm.pinf.io/PINF.core.json": {
+            "location": "{{env.PGS_PACKAGES_DIRPATH}}/03-vm.pinf.io/PINF.core.json",
+            "@args": {}
+        },
+        "03-pinf.tools.ScriptedCloud/PINF.core.json": {
+            "location": "{{env.PGS_PACKAGES_DIRPATH}}/03-pinf.tools.ScriptedCloud/PINF.core.json",
+            "@args": {}
+        },
+        "03-pinf.tools.ScriptedCloud/PINF.proto.json": {
+            "location": "{{env.PGS_PACKAGES_DIRPATH}}/03-pinf.tools.ScriptedCloud/PINF.proto.json",
+            "@args": {}
+        },
+        "03-vm.pinf.io/PINF.proto.json": {
+            "location": "{{env.PGS_PACKAGES_DIRPATH}}/03-vm.pinf.io/PINF.proto.json",
+            "@args": {}
+        },
+        "03-pinf.tools.ScriptedCloud/PINF.proto/to.pinf.dnsimple.proto.patch.json": {
+            "location": "{{env.PGS_PACKAGES_DIRPATH}}/03-pinf.tools.ScriptedCloud/PINF.proto/to.pinf.dnsimple.proto.patch.json",
+            "@args": {}
+        },
+        "03-vm.pinf.io/PINF.proto/io.pinf.server.grunt~0.proto.patch.json": {
+            "location": "{{env.PGS_PACKAGES_DIRPATH}}/03-vm.pinf.io/PINF.proto/io.pinf.server.grunt~0.proto.patch.json",
+            "@args": {
+                "PGS_WORKSPACE_ROOT": "{{__DIRNAME__}}",
+                "PGS_PACKAGES_DIRPATH": "{{__DIRNAME__}}/.deps",
+                "grunts": {
+                    "local": {},
+                    "remote": {}
+                }
+            }
+        },
+        "03-vm.pinf.io/PINF.proto/io.pinf.server.webpack~0.proto.patch.json": {
+            "location": "{{env.PGS_PACKAGES_DIRPATH}}/03-vm.pinf.io/PINF.proto/io.pinf.server.webpack~0.proto.patch.json",
+            "@args": {
+                "PGS_WORKSPACE_ROOT": "{{__DIRNAME__}}",
+                "PGS_PACKAGES_DIRPATH": "{{__DIRNAME__}}/.deps",
+                "packs": {
+                    "local": {},
+                    "remote": {}
+                }
+            }
+        },
+        "04-devcomp.org/PINF.core.json": {
+            "location": "{{env.PGS_PACKAGES_DIRPATH}}/04-devcomp.org/PINF.core.json",
+            "@args": {}
+        }
+    },
+    "config": {
+        "github.com/pinf-to/pinf-to-process/0": {
+            "$to": {
+                "services-proxy": {
+                    "basePath": "{{__DIRNAME__}}/.deps/github.com~pinf-io~io.pinf.proxy~0/source/installed/master",
+                    "commands": {
+                        "start": "node server.js"
+                    },
+                    "boot": {
+                        "config": "io.pinf.proxy/0"
+                    },
+                    "config": {
+                        "io.pinf.proxy/0": {
+                            "port": 8081,
+                            "bind": "127.0.0.1"
+                        }
+                    }
+                },
+                "grunt-service": {
+                    "basePath": "{{__DIRNAME__}}/.deps/github.com~pinf-io~io.pinf.server.grunt~0/source/installed/master",
+                    "commands": {
+                        "start": "./bin/run-dev-server"
+                    },
+                    "boot": {
+                        "config": "io.pinf.server.grunt/0"
+                    },
+                    "env": {
+                        "VERBOSE": "1",
+                        "DEBUG": "1"
+                    },
+                    "config": {
+                        "io.pinf.server.grunt/0": {
+                            "port": 8083,
+                            "bind": "127.0.0.1",
+                            "grunts": {}
+                        }
+                    }
+                },
+                "webpack-service": {
+                    "basePath": "{{__DIRNAME__}}/.deps/github.com~pinf-io~io.pinf.server.webpack~0/source/installed/master",
+                    "commands": {
+                        "start": "./bin/run-dev-server"
+                    },
+                    "boot": {
+                        "config": "io.pinf.server.webpack/0"
+                    },
+                    "config": {
+                        "io.pinf.server.webpack/0": {
+                            "port": 8084,
+                            "bind": "127.0.0.1",
+                            "packs": {}
+                        }
+                    }
+                }
+            }
+        },
+        "github.com/pinf-to/pinf-to-openshift/0": {
+            "openshift": {
+                "cartridge": "nodejs-0.10",
+                "publicKeyPath": "{{$from.space['$space.pinf.genesis/origin/0'].public.keyPath}}",
+                "publicKeyName": "{{$from.system.dirname}}",
+                "privateKeyPath": "{{$from.space['$space.pinf.genesis/origin/0'].secret.keyPath}}",
+                "app": "devtools.{{$from.system.dirname}}"
+            },
+            "$to": "server-devtools",
+            "env": {
+                "PIO_HOME": "$HOME/app-root/data/io.pinf",
+                "BO_ROOT_SCRIPT_PATH": "$HOME/app-root/data/io.pinf/bin/bash.origin",
+                "BO_SYSTEM_CACHE_DIR": "$HOME/app-root/data/io.pinf/cache/bash.origin.cache"
+            }
+        },
+        "github.com/pinf-io/io.pinf.pio.sync/0": {
+            "$to": {
+                "pio-sync-services": {
+                    "ssh": {
+                        "ip": "{{$from.server-services.vm.ip}}",
+                        "user": "{{$from.server-services.dropplet.sshUser}}",
+                        "privateKeyPath": "{{$from.server-services.dropplet.keyPath}}"
+                    },
+                    "vfs-socket-server": {
+                        "port": 8086,
+                        "bind": "{{$from.server-services.vm.ip}}",
+                        "privateKeyPath": "{{$from.server-services.dropplet.keyPath}}"
+                    },
+                    "env": "{{$from.server-services.env}}",
+                    "adapters": {
+                        "os": "pinf.io-for-ubuntu"
+                    },
+                    "services": {
+                        "bash.origin": {
+                            "location": "bash.origin"
+                        },
+                        "pinf.io-for-ubuntu": {
+                            "depends": [
+                                "bash.origin"
+                            ],
+                            "location": "pinf.io-for-ubuntu",
+                            "config": {
+                                "pio.pinf.io/0": {
+                                    "on": {
+                                        "postactivate": "bin/install"
+                                    }
+                                }
+                            }
+                        },
+                        "pinf-it-package-insight": {
+                            "depends": [
+                                "pinf.io-for-ubuntu"
+                            ],
+                            "location": "pinf-it-package-insight"
+                        },
+                        "smi-for-npm": {
+                            "depends": [
+                                "pinf.io-for-ubuntu",
+                                "bash.origin",
+                                "pinf-it-package-insight"
+                            ],
+                            "location": "smi-for-npm",
+                            "config": {
+                                "pio.pinf.io/0": {
+                                    "on": {
+                                        "postactivate": [
+                                            "bin/link-to $PIO_BIN_DIRPATH/smi-for-npm",
+                                            "smi-for-npm relink"
+                                        ]
+                                    }
+                                }
+                            }
+                        },
+                        "org.pinf.lib": {
+                            "depends": [
+                                "smi-for-npm"
+                            ],
+                            "location": "org.pinf.lib"
+                        },
+                        "org.pinf.genesis.lib": {
+                            "depends": [
+                                "org.pinf.lib"
+                            ],
+                            "location": "org.pinf.genesis.lib"
+                        },
+                        "pinf.io-for-unix": {
+                            "depends": [
+                                "bash.origin",
+                                "org.pinf.genesis.lib"
+                            ],
+                            "location": "pinf.io-for-unix",
+                            "config": {
+                                "org.pinf.genesis.lib/0": {
+                                    "api": {
+                                        "consumes": {
+                                            "FLAVOR": "pinf.io-for-ubuntu/0/manifested-os"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "io.pinf.pio.postsync": {
+                            "depends": [
+                                "bash.origin",
+                                "pinf.io-for-unix",
+                                "org.pinf.genesis.lib"
+                            ],
+                            "location": "io.pinf.pio.postsync",
+                            "config": {
+                                "org.pinf.genesis.lib/0": {
+                                    "api": {
+                                        "consumes": {
+                                            "OS": "pinf.io-for-unix/0/virtual-os"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "vfs-local": {
+                            "depends": [
+                                "io.pinf.pio.postsync"
+                            ],
+                            "location": "vfs-local"
+                        },
+                        "vfs-socket": {
+                            "depends": [
+                                "vfs-local"
+                            ],
+                            "location": "vfs-socket"
+                        },
+                        "io.pinf.pio.sync": {
+                            "depends": [
+                                "io.pinf.pio.postsync",
+                                "vfs-local",
+                                "vfs-socket"
+                            ],
+                            "location": "io.pinf.pio.sync",
+                            "config": {
+                                "io.pinf.pio.sync/0": {
+                                    "vfs-socket-server": {
+                                        "port": 8086,
+                                        "bind": "{{$from.server-services.vm.ip}}",
+                                        "publicKey": "{{$from.space['$space.pinf.genesis/origin/0'].public.pem}}"
+                                    }
+                                }
+                            }
+                        },
+                        "io.pinf.proxy": {
+                            "depends": [
+                                "io.pinf.pio.postsync",
+                                "io.pinf.pio.sync"
+                            ],
+                            "location": "io.pinf.proxy",
+                            "boot": {
+                                "config": "io.pinf.proxy/0"
+                            },
+                            "config": {
+                                "io.pinf.proxy/0": {
+                                    "port": 8085,
+                                    "bind": "{{$from.server-services.vm.ip}}",
+                                    "services": {
+                                        "io.pinf.pio.sync.vfs.rest": {
+                                            "implementation": "SYNC_VFS_REST"
+                                        }
+                                    },
+                                    "vhosts": {
+                                        "io-pinf-pio-sync-vfs-socket.{{$from.system.hostname}}": "{{$from.server-services.vm.ip}}:8086"
+                                    }
+                                },
+                                "org.pinf.genesis.lib/0": {
+                                    "api": {
+                                        "consumes": {
+                                            "SYNC_VFS_REST": "io.pinf.pio.sync/0/vfs-rest"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "io.pinf.server.grunt": {
+                            "depends": [
+                                "bash.origin",
+                                "io.pinf.pio.postsync",
+                                "org.pinf.genesis.lib",
+                                "org.pinf.lib",
+                                "io.pinf.proxy"
+                            ],
+                            "location": "{{__DIRNAME__}}/node_modules/io.pinf.server.grunt",
+                            "boot": {
+                                "config": "io.pinf.server.grunt/0"
+                            },
+                            "config": {
+                                "io.pinf.server.grunt/0": {
+                                    "port": 8083,
+                                    "bind": "{{$from.server-services.vm.ip}}",
+                                    "grunts": {}
+                                }
+                            }
+                        },
+                        "io.pinf.server.webpack": {
+                            "depends": [
+                                "bash.origin",
+                                "io.pinf.pio.postsync",
+                                "org.pinf.genesis.lib",
+                                "org.pinf.lib",
+                                "io.pinf.proxy"
+                            ],
+                            "location": "{{__DIRNAME__}}/node_modules/io.pinf.server.webpack",
+                            "boot": {
+                                "config": "io.pinf.server.webpack/0"
+                            },
+                            "config": {
+                                "io.pinf.server.webpack/0": {
+                                    "port": 8084,
+                                    "bind": "{{$from.server-services.vm.ip}}",
+                                    "packs": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "ScriptedCloud.PINF.Tools/0": {
+            "$to": "system",
+            "$depends": [
+                "smi-git-catalog",
+                "smi-npm-catalog",
+                "ScriptedCloud.PINF.Tools-commands"
+            ]
+        },
+        "ScriptedCloud.PINF.Tools/ci/0": {
+            "$to": "ScriptedCloud.PINF.Tools-ci",
+            "$depends": [
+                "server-testing"
+            ]
+        },
+        "ScriptedCloud.PINF.Tools/expand-only/0": {
+            "$to": "ScriptedCloud.PINF.Tools-expand-only"
+        },
+        "ScriptedCloud.PINF.Tools/boot/0": {
+            "$to": "ScriptedCloud.PINF.Tools",
+            "$depends": [
+                "dns"
+            ]
+        },
+        "github.com/pinf-tools/CloudCommands/0": {
+            "$to": "ScriptedCloud.PINF.Tools-commands",
+            "tools.pinf.CloudCommands/commands/0": {
+                "register": true
+            }
+        },
+        "github.com/sourcemint/smi-for-git/0": {
+            "$to": "smi-git-catalog",
+            "export": {
+                "catalog": "{{__DIRNAME__}}/smi.json"
+            }
+        },
+        "github.com/sourcemint/smi-for-npm/0": {
+            "$to": "smi-npm-catalog",
+            "declaredMappings": "{{$from.smi-git-catalog.declaredMappings}}",
+            "export": {
+                "catalog": "{{__DIRNAME__}}/smi.json"
+            }
+        },
+        "github.com/pinf-space/Genesis/0": {
+            "$to": "space",
+            "space.pinf.genesis/origin/0": {
+                "@impl": "io.pinf.pio.profile/space.pinf.genesis-origin/0",
+                "id": "{{env.PIO_PROFILE_KEY}}",
+                "label": "{{$from.system.dirname}}",
+                "secret": {
+                    "keyPath": "{{$from.system.privateKeyPath}}"
+                },
+                "stores": {
+                    "primary": {
+                        "@impl": "com.amazon.aws/s3/0",
+                        "s3": {
+                            "region": "us-west-1",
+                            "publicHost": "s3-us-west-1.amazonaws.com",
+                            "path": "{{$from.system.dirname}}"
+                        }
+                    }
+                }
+            },
+            "space.pinf.genesis/access/0": {
+                "@impl": "io.pinf.pio.profile/space.pinf.genesis-access/0"
+            },
+            "tools.pinf.CloudCommands/commands/0": {
+                "commands": {
+                    "root.space.invite": {
+                        "@impl": "space.pinf.genesis/origin.get-invite-token/0",
+                        "label": "[ROOT] Invite someone into this space on EQUAL TERMS AS YOU!",
+                        "options": {
+                            "scope": "root"
+                        }
+                    }
+                }
+            }
+        },
+        "github.com/pinf-io/io.pinf.pio.profile/0": {
+            "$to": "profile",
+            "space.pinf.genesis/origin/0": "{{$from.space['$space.pinf.genesis/origin/0']}}",
+            "space.pinf.genesis/access/0": "{{$from.space['$space.pinf.genesis/access/0']}}",
+            "files": {
+                "profile.json": {
+                    "path": "{{__DIRNAME__}}.profile.json"
+                },
+                "activate.sh": {
+                    "path": "{{activatePathFromProfilePath({{__DIRNAME__}}.profile.json)}}"
+                },
+                "ssh.key": {
+                    "path": "{{$from.system.privateKeyPath}}"
+                }
+            }
+        },
+        "github.com/pinf-to/pinf-to-digitalocean/0": {
+            "$to": "server-services",
+            "credentials": "{{$from.profile.credentials['digitalocean.com']}}",
+            "dropplet": {
+                "name": "{{$from.system.dirname}}",
+                "keyId": "{{$from.system.dirname}}",
+                "keyPath": "{{$from.space['$space.pinf.genesis/origin/0'].secret.keyPath}}",
+                "keyPubPath": "{{$from.space['$space.pinf.genesis/origin/0'].public.keyPath}}"
+            },
+            "env": {
+                "PIO_HOME": "$HOME/io.pinf",
+                "BO_ROOT_SCRIPT_PATH": "$HOME/io.pinf/bin/bash.origin",
+                "BO_SYSTEM_CACHE_DIR": "$HOME/io.pinf/cache/bash.origin.cache"
+            }
+        },
+        "github.com/pinf-to/pinf-to-travis-ci/0": {
+            "$to": "server-testing"
+        },
+        "devcomp.org/dev/0": {
+            "$to": "devcomp.org-dev",
+            "$depends": [
+                "devcomp.org-dev-local",
+                "devcomp.org-dev-online"
+            ]
+        },
+        "devcomp.org/dev-local/0": {
+            "$to": "devcomp.org-dev-local",
+            "$depends": [
+                "webpack-service",
+                "grunt-service",
+                "services-proxy"
+            ]
+        },
+        "devcomp.org/dev-online/0": {
+            "$to": "devcomp.org-dev-online",
+            "$depends": [
+                "dns",
+                "pio-sync-services"
+            ]
+        },
+        "github.com/pinf-to/pinf-to-dnsimple/0": {
+            "$to": "dns",
+            "credentials": "{{$from.profile.credentials['dnsimple.com']}}",
+            "github.com/pinf-logic/pinf.logic-for-dns/0": {
+                "records": {
+                    "{{$from.system.hostname}}": {
+                        "domain": "{{$from.system.topLevelDomain}}",
+                        "type": "A",
+                        "data": "{{$from.server-services.vm.ip}}"
+                    },
+                    "*.{{$from.system.hostname}}": {
+                        "domain": "{{$from.system.topLevelDomain}}",
+                        "type": "CNAME",
+                        "data": "{{$from.system.hostname}}"
+                    }
+                }
+            }
+        }
+    },
+    "mappings": {
+        "{{env.PGS_PACKAGES_DIRPATH}}/03-vm.pinf.io": {
+            "location": "git@github.com:pinf-io/io.pinf.vm.git#1c2134a3069078ddef19c3832e8984d38116f63b(wip)",
+            "install": false
+        },
+        "{{env.PGS_PACKAGES_DIRPATH}}/03-pinf.tools.ScriptedCloud": {
+            "location": "git@github.com:pinf-tools/ScriptedCloud.git#2167bb655a37c1366851d9713cddb6c5b5bb7e51(master)",
+            "install": false
+        },
+        "{{env.PGS_PACKAGES_DIRPATH}}/04-devcomp.org": {
+            "location": "git@github.com:devcomp/devcomp.org.git#ee2b1efa5c39144af3961d94b7a4995cb8d68148(master)",
+            "install": false
+        },
+        "{{env.PGS_PACKAGES_DIRPATH}}/github.com~sourcemint~sm.resolve~0/source/installed/master": {
+            "location": "git@github.com:sourcemint/sm.resolve.git#75d02b7a530d3abb375179518371532becc54ca0(master)"
+        },
+        "{{env.PGS_PACKAGES_DIRPATH}}/github.com~bash-origin~bash.origin~0/source/installed/master": {
+            "location": "git@github.com:bash-origin/bash.origin.git#a122dd34183a64fa74bbb218a4c9958dc20226a3(master)"
+        },
+        "{{env.PGS_PACKAGES_DIRPATH}}/github.com~cadorn~fswalker~0/source/installed/master": {
+            "location": "git@github.com:cadorn/fswalker.git#ae378bac45dd4f3f3610b8c22256a656a7d7d772"
+        },
+        "{{env.PGS_PACKAGES_DIRPATH}}/github.com~sourcemint~smi~0/source/installed/master": {
+            "location": "git@github.com:sourcemint/smi.git#be33a37e64b3fa80841cfdfadc1cc7f23825e2f7(master)"
+        },
+        "{{env.PGS_PACKAGES_DIRPATH}}/github.com~pinf-it~pinf-it-package-insight~0/source/installed/master": {
+            "location": "git@github.com:pinf-it/pinf-it-package-insight.git#fef2d98f43f47d2644790a4c6d91057e5492ef05"
+        },
+        "{{env.PGS_PACKAGES_DIRPATH}}/github.com~sourcemint~smi-for-npm~0/source/installed/master": {
+            "location": "git@github.com:sourcemint/smi-for-npm.git#f298af2ee83cb2deb63071c17fc1b9d57dfe15f2(master)"
+        },
+        "{{env.PGS_PACKAGES_DIRPATH}}/github.com~sourcemint~smi-for-git~0/source/installed/master": {
+            "location": "git@github.com:sourcemint/smi-for-git.git#5511b0b2ac1244be23cec98627c0f892002e5fea(master)"
+        },
+        "{{env.PGS_PACKAGES_DIRPATH}}/github.com~bash-origin~bash.origin.pinf~0/source/installed/master": {
+            "location": "git@github.com:bash-origin/bash.origin.pinf.git#3b48868d20e562c0ff41a1845cf1dde87b4816d6(master)"
+        },
+        "{{env.PGS_PACKAGES_DIRPATH}}/github.com~bash-origin~bash.origin.prompt~0/source/installed/master": {
+            "location": "git@github.com:bash-origin/bash.origin.prompt.git#138ae6abd6e5ccdc8c5e01c790c9f314a935b812"
+        },
+        "{{env.PGS_PACKAGES_DIRPATH}}/github.com~bash-origin~bash.origin.sourcemint~0/source/installed/master": {
+            "location": "git@github.com:bash-origin/bash.origin.sourcemint.git#4b60bc488da315225481df58b8d4ab62bba76dc1"
+        },
+        "{{env.PGS_PACKAGES_DIRPATH}}/github.com~sourcemint~org.sourcemint.genesis.lib~0/source/installed/master": {
+            "location": "git@github.com:sourcemint/org.sourcemint.genesis.lib.git#26f9c61c91b2db5a3d85e9f8ae9302e1befe0b26"
+        },
+        "{{env.PGS_PACKAGES_DIRPATH}}/github.com~pinf-it~pinf-it-filetree-insight~0/source/installed/master": {
+            "location": "git@github.com:pinf-it/pinf-it-filetree-insight.git#7ef79fba95643b8e7716534374575b6ba0f2a1bf"
+        },
+        "{{env.PGS_PACKAGES_DIRPATH}}/github.com~pinf-to~pto-for-npm~0/source/installed/master": {
+            "location": "git@github.com:pinf-to/pto-for-npm.git#6e9720ee38b6edcfc31ae7637e21c7a48491406c"
+        },
+        "{{env.PGS_PACKAGES_DIRPATH}}/github.com~pinf-to~to.pinf.lib~0/source/installed/master": {
+            "location": "git@github.com:pinf-to/to.pinf.lib.git#03c97d85fda87344064e85fe0529ac37938ad327(master)"
+        },
+        "{{env.PGS_PACKAGES_DIRPATH}}/github.com~pinf~org.pinf.genesis.lib~0/source/installed/master": {
+            "location": "git@github.com:pinf/org.pinf.genesis.lib.git#6aad5e96e883ae1589a8b8651aa257bedfdb94b2(master)"
+        },
+        "{{env.PGS_PACKAGES_DIRPATH}}/github.com~pinf~org.pinf.lib~0/source/installed/master": {
+            "location": "git@github.com:pinf/org.pinf.lib.git#29ce9282ae092d373ddc282b47b02ee23c7e6b09(master)"
+        },
+        "{{env.PGS_PACKAGES_DIRPATH}}/github.com~sourcemint~smt-copy~0/source/installed/master": {
+            "location": "git@github.com:sourcemint/smt-copy.git#07de206d61805eb785309bb08433552c9a19a0c4"
+        }
+    },
+    "dependencies": {
+        "q": "1.4.1",
+        "deepcopy": "0.5.0",
+        "escape-regexp-component": "1.0.2",
+        "fs-extra": "0.18.4",
+        "graceful-fs": "3.0.8",
+        "async": "0.7.0",
+        "colors": "1.1.2",
+        "commander": "2.8.1",
+        "deepequal": "0.0.1",
+        "deepmerge": "0.2.10",
+        "dirsum": "0.1.1",
+        "glob": "5.0.10",
+        "mfs": "0.1.1",
+        "moment": "2.10.3",
+        "pinf-it-filetree-insight": "0.1.1",
+        "request": "2.58.0",
+        "require.async": "0.1.1",
+        "smi.cache": "0.3.1",
+        "touch": "0.0.3",
+        "waitfor": "0.1.3",
+        "org.pinf.lib": "0.1.5",
+        "babel": "4.7.16",
+        "pinf-primitives-js": "0.2.0",
+        "bash.origin": "0.1.23",
+        "fswalker": "0.1.0",
+        "json-stable-stringify": "1.0.0",
+        "pinf-it-package-insight": "0.1.8",
+        "semver": "4.3.6",
+        "inquirer": "0.8.5",
+        "ncp": "2.0.0",
+        "org.pinf.genesis.lib": "0.1.3",
+        "to.pinf.lib": "0.1.0",
+        "gulp": "3.9.0",
+        "gulp-debug": "2.0.1",
+        "gulp-edit": "0.0.1",
+        "gulp-filter": "2.0.2",
+        "gulp-plumber": "0.6.6",
+        "gulp-rename": "1.2.2",
+        "gulp-replace": "0.5.3",
+        "gulp-watch": "4.2.4",
+        "extend": "2.0.1",
+        "jsonwebtoken": "5.0.2",
+        "node-forge": "0.6.30",
+        "pinf-it-program-insight": "0.1.3",
+        "winston": "0.9.0",
+        "JSONPath": "0.11.0",
+        "changeset": "0.1.0",
+        "q-throttle": "0.1.0"
+    }
+}
