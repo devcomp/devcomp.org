@@ -67,8 +67,12 @@
             "$to": "devcomp.org-dev-online",
             "$depends": [
                 "dns",
+                "server-services",
                 "pio-sync-services"
-            ]
+            ],
+            "$overlay": {
+                "@inject": "/pinf.genesis/03-vm.pinf.io/PINF.proto/server-services~0.smi.json"
+            }
         }
     },
     "mappings": {}
