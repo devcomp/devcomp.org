@@ -2,9 +2,6 @@
     "@extends": {
         "ScriptedCloud": "/pinf.genesis/03-pinf.tools.ScriptedCloud/PINF.proto.json",
         "vm.pinf.io": "/pinf.genesis/03-vm.pinf.io/PINF.proto.json",
-        "to.pinf.dnsimple": {
-            "location": "/pinf.genesis/03-pinf.tools.ScriptedCloud/PINF.proto/to.pinf.dnsimple.proto.patch.json"
-        },
         "io.pinf.server.grunt": {
             "location": "/pinf.genesis/03-vm.pinf.io/PINF.proto/io.pinf.server.grunt~0.proto.patch.json",
             "@args": {
@@ -65,13 +62,8 @@
         },
         "devcomp.org/dev-online/0": {
             "$to": "devcomp.org-dev-online",
-            "$depends": [
-                "dns",
-                "server-services",
-                "pio-sync-services"
-            ],
             "$overlay": {
-                "@inject": "/pinf.genesis/03-vm.pinf.io/PINF.proto/server-services~0.smi.json"
+                "@inject": "{{__DIRNAME__}}/PINF.proto/devcomp.org-dev-online~0.config.json"
             }
         }
     },
