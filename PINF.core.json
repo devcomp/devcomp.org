@@ -3,7 +3,7 @@
         "ScriptedCloud": "/pinf.genesis/03-pinf.tools.ScriptedCloud/PINF.proto.json",
         "vm.pinf.io": "/pinf.genesis/03-vm.pinf.io/PINF.proto.json",
         "io.pinf.server.grunt": {
-            "location": "/pinf.genesis/03-vm.pinf.io/PINF.proto/io.pinf.server.grunt~0.proto.patch.json",
+            "location": "/pinf.genesis/03-vm.pinf.io/PINF.proto/io.pinf.server.grunt~0.sm.json",
             "@args": {
                 "PGS_WORKSPACE_ROOT": "{{env.PGS_WORKSPACE_ROOT}}",
                 "PGS_PACKAGES_DIRPATH": "{{env.PGS_PACKAGES_DIRPATH}}",
@@ -14,7 +14,7 @@
             }
         },
         "io.pinf.server.webpack": {
-            "location": "/pinf.genesis/03-vm.pinf.io/PINF.proto/io.pinf.server.webpack~0.proto.patch.json",
+            "location": "/pinf.genesis/03-vm.pinf.io/PINF.proto/io.pinf.server.webpack~0.sm.json",
             "@args": {
                 "PGS_WORKSPACE_ROOT": "{{env.PGS_WORKSPACE_ROOT}}",
                 "PGS_PACKAGES_DIRPATH": "{{env.PGS_PACKAGES_DIRPATH}}",
@@ -63,7 +63,7 @@
         "devcomp.org/dev-online/0": {
             "$to": "devcomp.org-dev-online",
             "$overlay": {
-                "@inject": "{{__DIRNAME__}}/PINF.proto/devcomp.org-dev-online~0.config.json"
+                "@inject": "{{__DIRNAME__}}/PINF.proto/devcomp.org-dev-online~0.sm.json"
             }
         }
     },
