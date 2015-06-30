@@ -43,7 +43,9 @@
     },
     "config": {
         "ScriptedCloud.PINF.Tools/boot/0": {
-            "$depends": []
+            "$depends": [
+                "system"
+            ]
         },
         "devcomp.org/dev/0": {
             "$to": "devcomp.org-dev",
@@ -63,7 +65,7 @@
         "devcomp.org/dev-online/0": {
             "$to": "devcomp.org-dev-online",
             "$overlay": {
-                "@inject": "{{__DIRNAME__}}/PINF.proto/devcomp.org-dev-online~0.sm.json"
+                "@inject": "{{__DIRNAME__}}/PINF.proto/devcomp.org-dev-online~0.enable.json"
             }
         }
     },

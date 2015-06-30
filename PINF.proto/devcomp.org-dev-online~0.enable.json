@@ -7,7 +7,7 @@
         "devcomp.org/dev-online/0": {
             "$depends": [
                 "server-services~0.config.json",
-                "dns~0.config.json"
+                "dns~0.enable.json"
             ]
         }		
 	}
