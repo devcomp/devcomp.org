@@ -1,6 +1,7 @@
 {
     "@extends": {
-        "devcomp.org": "{{__DIRNAME__}}/PINF.proto.json"
+        "devcomp.org": "{{__DIRNAME__}}/PINF.proto.json",
+        "devcomp.org/PINF.proto/firenode-for-github~0.sm.json": "{{__DIRNAME__}}/PINF.proto/firenode-for-github~0.sm.json"
     },
     "boot": {
         "config": "ScriptedCloud.PINF.Tools/boot/0"

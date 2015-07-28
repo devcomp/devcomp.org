@@ -2,8 +2,11 @@
     "@extends": {
         "ScriptedCloud": "/pinf.genesis/03-pinf.tools.ScriptedCloud/PINF.proto.json",
         "vm.pinf.io": "/pinf.genesis/03-vm.pinf.io/PINF.proto.json",
-        "io.pinf.server.grunt": {
-            "location": "/pinf.genesis/03-vm.pinf.io/PINF.proto/io.pinf.server.grunt~0.sm.json",
+        "io.pinf.server.grunt/sm": {
+            "location": "/pinf.genesis/03-vm.pinf.io/PINF.proto/io.pinf.server.grunt~0.sm.json"
+        },
+        "io.pinf.server.grunt/enable": {
+            "location": "/pinf.genesis/03-vm.pinf.io/PINF.proto/io.pinf.server.grunt~0.enable.json",
             "@args": {
                 "PGS_WORKSPACE_ROOT": "{{env.PGS_WORKSPACE_ROOT}}",
                 "PGS_PACKAGES_DIRPATH": "{{env.PGS_PACKAGES_DIRPATH}}",
@@ -13,8 +16,11 @@
                 }
             }
         },
-        "io.pinf.server.webpack": {
-            "location": "/pinf.genesis/03-vm.pinf.io/PINF.proto/io.pinf.server.webpack~0.sm.json",
+        "io.pinf.server.webpack/sm": {
+            "location": "/pinf.genesis/03-vm.pinf.io/PINF.proto/io.pinf.server.webpack~0.sm.json"
+        },
+        "io.pinf.server.webpack/enable": {
+            "location": "/pinf.genesis/03-vm.pinf.io/PINF.proto/io.pinf.server.webpack~0.enable.json",
             "@args": {
                 "PGS_WORKSPACE_ROOT": "{{env.PGS_WORKSPACE_ROOT}}",
                 "PGS_PACKAGES_DIRPATH": "{{env.PGS_PACKAGES_DIRPATH}}",

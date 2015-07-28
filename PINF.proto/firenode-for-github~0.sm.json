@@ -1,0 +1,15 @@
+{
+    "@github.com~sourcemint~sm.expand~0/map": {
+        "sources": {
+            "github.com~firenode~firenode-for-github~0": {
+                "master": {
+                    "uri": "git://git@github.com:firenode/firenode-for-github.git",
+                    "installer": "npm"
+                }
+            }
+        },
+        "mappings": {
+            "firenode-for-github": "github.com~firenode~firenode-for-github~0/master"
+        }
+    }
+}

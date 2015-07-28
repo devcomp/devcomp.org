@@ -1,0 +1,76 @@
+{
+    "@args": {
+        "streams": {
+        }
+    },
+    "config": {
+        "github.com/pinf-to/pinf-to-process/0": {
+            "$to": {
+                "services-proxy": {
+                    "config": {
+                        "io.pinf.proxy/0": {
+                            "services": {
+                                "io.firenode.impl.firenode-for-github": {
+                                    "implementation": "FIRENODE_FOR_GITHUB_NOTIFY"
+                                }
+                            },
+                            "config": {
+                                "org.pinf.genesis.lib/0": {
+                                    "api": {
+                                        "consumes": {
+                                            "FIRENODE_FOR_GITHUB_NOTIFY": "firenode-for-github/0/notify"
+                                        }
+                                    }
+                                }                                
+                            }
+                        }
+                    }
+                },
+                "firenode-for-github-service": {
+                    "basePath": "{{__DIRNAME2__}}/.deps/github.com~firenode~firenode-for-github~0/source/installed/master",
+                    "commands": {
+                        "start": "node server.js"
+                    },
+                    "boot": {
+                        "config": "firenode-for-github/0"
+                    },
+                    "config": {
+                        "firenode-for-github/0": {
+                            "port": 8091,
+                            "bind": "127.0.0.1",
+                            "streams": "{{$.@args.streams}}"
+                        }
+                    }
+                }
+            }
+        },
+        "github.com/pinf-io/io.pinf.pio.sync/0": {
+            "$to": {
+                "pio-sync-services": {
+                    "services": {
+                        "io.pinf.proxy": {
+                            "config": {
+                                "io.pinf.proxy/0": {
+                                    "services": {
+                                        "io.firenode.impl.firenode-for-github": {
+                                            "implementation": "FIRENODE_FOR_GITHUB_NOTIFY"
+                                        }
+                                    },
+                                    "config": {
+                                        "org.pinf.genesis.lib/0": {
+                                            "api": {
+                                                "consumes": {
+                                                    "FIRENODE_FOR_GITHUB_NOTIFY": "firenode-for-github/0/notify"
+                                                }
+                                            }
+                                        }                                        
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
