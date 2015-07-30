@@ -27,7 +27,7 @@
                     }
                 },
                 "firenode-for-github-service": {
-                    "basePath": "{{__DIRNAME2__}}/.deps/github.com~firenode~firenode-for-github~0/source/installed/master",
+                    "basePath": "{{env.PGS_PACKAGES_DIRPATH}}/github.com~firenode~firenode-for-github~0/source/installed/master",
                     "commands": {
                         "start": "node server.js"
                     },

@@ -1,7 +1,7 @@
 {
 	"@extends": {
-        "03-vm.pinf.io/PINF.proto/server-services~0.enable.json": "/pinf.genesis/03-vm.pinf.io/PINF.proto/server-services~0.enable.json",
-        "03-pinf.tools.ScriptedCloud/PINF.proto/dns~0.enable.json": "/pinf.genesis/03-pinf.tools.ScriptedCloud/PINF.proto/dns~0.enable.json"
+        "03-vm.pinf.io/PINF.proto/server-services~0.enable.json": "{{env.PGS_PACKAGES_DIRPATH}}/github.com~pinf-io~vm.pinf.io~0/source/installed/master/PINF.proto/server-services~0.enable.json",
+        "03-pinf.tools.ScriptedCloud/PINF.proto/dns~0.enable.json": "{{env.PGS_PACKAGES_DIRPATH}}/github.com~pinf-tools~ScriptedCloud~0/source/installed/master/PINF.proto/dns~0.enable.json"
 	},
 	"config": {
         "devcomp.org/dev-online/0": {

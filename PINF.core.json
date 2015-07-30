@@ -1,12 +1,12 @@
 {
     "@extends": {
-        "ScriptedCloud": "/pinf.genesis/03-pinf.tools.ScriptedCloud/PINF.proto.json",
-        "vm.pinf.io": "/pinf.genesis/03-vm.pinf.io/PINF.proto.json",
+        "ScriptedCloud": "{{env.PGS_PACKAGES_DIRPATH}}/github.com~pinf-tools~ScriptedCloud~0/source/installed/master/PINF.proto.json",
+        "vm.pinf.io": "{{env.PGS_PACKAGES_DIRPATH}}/github.com~pinf-io~vm.pinf.io~0/source/installed/master/PINF.proto.json",
         "io.pinf.server.grunt/sm": {
-            "location": "/pinf.genesis/03-vm.pinf.io/PINF.proto/io.pinf.server.grunt~0.sm.json"
+            "location": "{{env.PGS_PACKAGES_DIRPATH}}/github.com~pinf-io~vm.pinf.io~0/source/installed/master/PINF.proto/io.pinf.server.grunt~0.sm.json"
         },
         "io.pinf.server.grunt/enable": {
-            "location": "/pinf.genesis/03-vm.pinf.io/PINF.proto/io.pinf.server.grunt~0.enable.json",
+            "location": "{{env.PGS_PACKAGES_DIRPATH}}/github.com~pinf-io~vm.pinf.io~0/source/installed/master/PINF.proto/io.pinf.server.grunt~0.enable.json",
             "@args": {
                 "PGS_WORKSPACE_ROOT": "{{env.PGS_WORKSPACE_ROOT}}",
                 "PGS_PACKAGES_DIRPATH": "{{env.PGS_PACKAGES_DIRPATH}}",
@@ -17,10 +17,10 @@
             }
         },
         "io.pinf.server.webpack/sm": {
-            "location": "/pinf.genesis/03-vm.pinf.io/PINF.proto/io.pinf.server.webpack~0.sm.json"
+            "location": "{{env.PGS_PACKAGES_DIRPATH}}/github.com~pinf-io~vm.pinf.io~0/source/installed/master/PINF.proto/io.pinf.server.webpack~0.sm.json"
         },
         "io.pinf.server.webpack/enable": {
-            "location": "/pinf.genesis/03-vm.pinf.io/PINF.proto/io.pinf.server.webpack~0.enable.json",
+            "location": "{{env.PGS_PACKAGES_DIRPATH}}/github.com~pinf-io~vm.pinf.io~0/source/installed/master/PINF.proto/io.pinf.server.webpack~0.enable.json",
             "@args": {
                 "PGS_WORKSPACE_ROOT": "{{env.PGS_WORKSPACE_ROOT}}",
                 "PGS_PACKAGES_DIRPATH": "{{env.PGS_PACKAGES_DIRPATH}}",
@@ -33,14 +33,14 @@
     },
     "DISABLED_@extends": {
         "to.pinf.nwjs": {
-            "location": "/pinf.genesis/04-devcomp.org/PINF.proto/github.com~pinf-to~pinf-to-nwjs~0.proto.patch.json",
+            "location": "{{__DIRNAME__}}/PINF.proto/github.com~pinf-to~pinf-to-nwjs~0.proto.patch.json",
             "@args": {
                 "PGS_WORKSPACE_ROOT": "{{env.PGS_WORKSPACE_ROOT}}",
                 "PGS_PACKAGES_DIRPATH": "{{env.PGS_PACKAGES_DIRPATH}}"
             }
         },
         "org.devcomp.portal.ComponentTree": {
-            "location": "/pinf.genesis/04-devcomp.org/PINF.proto/github.com~devcomp~org.devcomp.portal.ComponentTree~0.proto.patch.json",
+            "location": "{{__DIRNAME__}}/PINF.proto/github.com~devcomp~org.devcomp.portal.ComponentTree~0.proto.patch.json",
             "@args": {
                 "PGS_WORKSPACE_ROOT": "{{env.PGS_WORKSPACE_ROOT}}",
                 "PGS_PACKAGES_DIRPATH": "{{env.PGS_PACKAGES_DIRPATH}}"
@@ -75,5 +75,22 @@
             }
         }
     },
-    "mappings": {}
+    "@github.com~sourcemint~sm.expand~0/map": {
+        "sources": {
+            "github.com~pinf-tools~ScriptedCloud~0": {
+                "master": {
+                    "uri": "git://git@github.com:pinf-tools/ScriptedCloud.git"
+                }
+            },
+            "github.com~pinf-io~vm.pinf.io~0": {
+                "master": {
+                    "uri": "git://git@github.com:pinf-io/vm.pinf.io.git"
+                }
+            }
+        },
+        "mappings": {
+            "github.com~pinf-tools~ScriptedCloud": "github.com~pinf-tools~ScriptedCloud~0/master",
+            "github.com~pinf-io~vm.pinf.io": "github.com~pinf-io~vm.pinf.io~0/master"
+        }
+    }
 }
